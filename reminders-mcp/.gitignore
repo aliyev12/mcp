@@ -1,0 +1,90 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+.eggs/
+.wheels/
+*.manifest
+*.spec
+
+# Virtual environments
+venv/
+.env/
+.env.*/
+.venv/
+.venv*/
+
+# Local Python configuration
+.python-version
+
+# -------------------------
+# FastAPI / Uvicorn
+# -------------------------
+# Uvicorn log files
+*.log
+
+# Static files (if generated)
+static/
+media/
+
+# -------------------------
+# MCP Server
+# -------------------------
+# MCP runtime caches/state (common patterns)
+.mcp/
+mcp_state/
+mcp_logs/
+.mcp_cache/
+mcp_server.db
+
+# If you generate protocol files or schema artifacts:
+mcp_generated/
+
+# -------------------------
+# Testing / Coverage
+# -------------------------
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+pytest_cache/
+
+# -------------------------
+# IDE / Editor
+# -------------------------
+# VSCode
+.vscode/
+# PyCharm
+.idea/
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# -------------------------
+# OS Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Docker
+# -------------------------
+docker-data/
+*.pid
+
+# -------------------------
+# Misc
+# -------------------------
+# Environment variable files
+*.env.backup
+.env.local
+.env.test
