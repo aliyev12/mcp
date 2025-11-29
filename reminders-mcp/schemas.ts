@@ -9,7 +9,11 @@ export const ReminderSchema = z.object({
   id: z.number().describe("Unique identifier of the reminder"),
   title: z.string().describe("Title of the reminder"),
   date: z.string().describe("Date of the reminder"),
-  location: z.string().nullable().describe("Location of the reminder"),
+  location: z
+    .string()
+    .nullable()
+    .optional()
+    .describe("Location of the reminder"),
   description: z.string().describe("Description of the reminder"),
   reminders: z
     .array(ReminderModeSchema)
@@ -17,7 +21,10 @@ export const ReminderSchema = z.object({
   alerts: z
     .array(z.number())
     .describe("List of alert times in milliseconds before the reminder"),
-  is_recurring: z.boolean().describe("Indicates if the reminder is recurring"),
+  is_recurring: z
+    .boolean()
+    .default(false)
+    .describe("Indicates if the reminder is recurring"),
   recurrence: z
     .any()
     .nullable()
@@ -31,7 +38,10 @@ export const ReminderSchema = z.object({
     .nullable()
     .describe("End date of the recurrence in ISO format"),
   last_alert_time: z.any().nullable().describe("Last alert time in ISO format"),
-  is_active: z.boolean().describe("Indicates if the reminder is active"),
+  is_active: z
+    .boolean()
+    .optional()
+    .describe("Indicates if the reminder is active"),
 });
 
 export const RemindersSchema = z
@@ -60,3 +70,21 @@ export const ReminderOutputSchema = z
   .describe("An array of active reminder objects.");
 
 export type TReminderOutput = z.infer<typeof ReminderOutputSchema>;
+
+export const CreateReminderInputSchema = z.object({
+  title: z.string().describe("Title of the reminder"),
+  date: z.string().describe("Date of the reminder"),
+  reminders: z
+    .array(ReminderModeSchema)
+    .describe("List of contact modes to use for the reminder"),
+  alerts: z
+    .array(z.number())
+    .describe("List of alert times in milliseconds before the reminder"),
+  is_recurring: z
+    .boolean()
+    .describe("Indicates if the reminder is recurring")
+    .default(false),
+  description: z.string().describe("Description of the reminder"),
+});
+
+export type TCreateReminderInput = z.infer<typeof CreateReminderInputSchema>;
