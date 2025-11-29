@@ -1,0 +1,27 @@
+{
+  "name": "reminders-mcp",
+  "version": "1.0.0",
+  "description": "MCP server to integrate reminders application API",
+  "keywords": [
+    "mcp"
+  ],
+  "license": "ISC",
+  "author": "Abdul Aliyev",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node --env-file=.env dist/main.js",
+    "test-mcp": "npm run build && npx @modelcontextprotocol/inspector node --env-file=.env dist/main.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "zod": "3.25.76"
+  }
+}
