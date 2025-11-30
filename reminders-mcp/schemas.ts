@@ -96,6 +96,19 @@ export type TReminderOutput = z.infer<typeof ReminderOutputSchema>;
 
 export const CreateReminderInputSchema = ReminderBaseSchema.extend({});
 
+export const DeleteReminderOutputSchema = z.object({
+  status: z.string().describe("Status of the delete operation"),
+  error: z
+    .string()
+    .optional()
+    .describe("Error message if the delete operation failed"),
+  deletedReminder: ReminderSchema.optional().describe(
+    "The reminder that was deleted"
+  ),
+});
+
+export type TDeleteReminderOutput = z.infer<typeof DeleteReminderOutputSchema>;
+
 export const UpdateReminderInputSchema = ReminderBaseSchema.extend({
   id: z.number().describe("Unique identifier of the reminder"),
 });

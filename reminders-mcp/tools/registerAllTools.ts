@@ -4,6 +4,7 @@ import { getActiveRemindersTool } from "./getActiveReminders.js";
 import { getAllRemindersTool } from "./getAllReminders.js";
 import { createReminderTool } from "./createReminder.js";
 import { updateReminderTool } from "./updateReminder.js";
+import { deleteReminderTool } from "./deleteReminder.js";
 
 export function registerAllTools(server: McpServer): void {
   getActiveRemindersTool(server);
@@ -11,4 +12,5 @@ export function registerAllTools(server: McpServer): void {
   createReminderTool(server);
   getReminderTool(server);
   updateReminderTool(server);
+  deleteReminderTool(server);
 }
