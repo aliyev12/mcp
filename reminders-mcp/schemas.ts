@@ -76,7 +76,6 @@ export type TReminder = z.infer<typeof ReminderSchema>;
 
 export type TReminderMode = z.infer<typeof ReminderModeSchema>;
 
-// Output Schemas
 export const RemindersOutputSchema = z
   .object({
     result: RemindersSchema.optional(),
@@ -97,4 +96,9 @@ export type TReminderOutput = z.infer<typeof ReminderOutputSchema>;
 
 export const CreateReminderInputSchema = ReminderBaseSchema.extend({});
 
+export const UpdateReminderInputSchema = ReminderBaseSchema.extend({
+  id: z.number().describe("Unique identifier of the reminder"),
+});
+
 export type TCreateReminderInput = z.infer<typeof CreateReminderInputSchema>;
+export type TUpdateReminderInput = z.infer<typeof UpdateReminderInputSchema>;

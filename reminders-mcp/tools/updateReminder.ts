@@ -3,19 +3,19 @@ import {
   type ToolCallback,
 } from "@modelcontextprotocol/sdk/server/mcp.js";
 import {
-  RemindersOutputSchema,
-  type TRemindersOutput,
-  CreateReminderInputSchema,
-  type TCreateReminderInput,
   ReminderOutputSchema,
+  UpdateReminderInputSchema,
+  type TRemindersOutput,
+  type TUpdateReminderInput,
 } from "../schemas.js";
 
 const apiKey = process.env.API_KEY;
 const remindersAppBaseUrl =
   process.env.REMINDERS_APP_BASE_URL || "http://localhost:8080";
 
-export function createReminderTool(server: McpServer): void {
-  const postHandler: ToolCallback<typeof CreateReminderInputSchema> = async ({
+export function updateReminderTool(server: McpServer): void {
+  const putHandler: ToolCallback<typeof UpdateReminderInputSchema> = async ({
+    id,
     title,
     date,
     location,
@@ -27,10 +27,10 @@ export function createReminderTool(server: McpServer): void {
     start_date,
     end_date,
     is_active,
-  }: TCreateReminderInput) => {
+  }: TUpdateReminderInput) => {
     try {
-      const response = await fetch(`${remindersAppBaseUrl}/reminders`, {
-        method: "POST",
+      const response = await fetch(`${remindersAppBaseUrl}/reminders/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "X-API-Key": apiKey!,
@@ -53,7 +53,7 @@ export function createReminderTool(server: McpServer): void {
       if (!response.ok) {
         const errorText = await response.text();
         const errorOutput: TRemindersOutput = {
-          error: `Failed to create a reminder. Status: ${response.status} ${response.statusText} - ${errorText}`,
+          error: `Failed to update a reminder. Status: ${response.status} ${response.statusText} - ${errorText}`,
         };
 
         return {
@@ -88,13 +88,13 @@ export function createReminderTool(server: McpServer): void {
   };
 
   server.registerTool(
-    "reminder_create",
+    "reminder_update",
     {
-      title: "Create a new reminder",
-      description: "Create a new reminder with the provided details",
-      inputSchema: CreateReminderInputSchema,
+      title: "Update an existing reminder",
+      description: "Update an existing reminder with the provided details",
+      inputSchema: UpdateReminderInputSchema,
       outputSchema: ReminderOutputSchema,
     },
-    postHandler
+    putHandler
   );
 }
